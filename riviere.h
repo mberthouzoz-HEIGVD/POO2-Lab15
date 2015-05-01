@@ -4,6 +4,15 @@
 
 using namespace std;
 
+class Person {
+private:
+    string name;
+public:
+    Person(string name) : name(name) {}
+    ~Person();
+    virtual bool canDrive() const = 0;
+};
+
 class Container {
 private:
     string name;
@@ -26,15 +35,6 @@ private:
 public:
     Boat(string name) : Container(name) {}
     ~Boat();
-};
-
-class Person {
-private:
-    string name;
-public:
-    Person(string name) : name(name) {}
-    ~Person();
-    virtual bool canDrive() const = 0;
 };
 
 class Pere : public Person {
