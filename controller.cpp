@@ -1,4 +1,11 @@
+#include "controller.h"
+#include <iostream>
+
 using namespace std;
+
+Controller::Controller() : turn(0), bankLeft(new Bank("Gauche")), bankRight(new Bank("Droite")), boat(new Boat("Bateau", bankLeft)) {
+
+}
 
 void Controller::showMenu() const {
     cout << "p      : afficher" << endl;
@@ -20,4 +27,24 @@ void Controller::display() const {
     cout << "----------------------------------------------------------" << endl;
     cout << "Droite:" << endl; // etc
     cout << "----------------------------------------------------------" << endl;
+}
+
+void Controller::embark(string name) {
+
+}
+
+void Controller::disembark(string name) {
+
+}
+
+void Controller::moveBoat() {
+
+}
+
+void Controller::reset() {
+
+}
+
+void Controller::nextTurn() {
+
 }

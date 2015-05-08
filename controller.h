@@ -1,4 +1,4 @@
-#include "riviere.h"
+#include "container.h"
 
 using namespace std;
 
@@ -9,9 +9,13 @@ private:
     Bank* bankRight;
     Boat* boat;
 public:
-    Controller() : turn(0) {}
+	Controller();
     ~Controller();
-    void showMenu() const;
+	void showMenu() const;
+	void embark(string name);
+	void disembark(string name);
+	void moveBoat();
+	void reset();
     void display() const;
     void nextTurn();
 };
