@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Controller::Controller() {
+Controller::Controller() : quit(false) {
     init();
 }
 

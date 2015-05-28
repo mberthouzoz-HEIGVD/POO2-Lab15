@@ -170,7 +170,7 @@ bool Boat::disembark(Person* p) {
     
     if (canRemove(p)) {
         if (current->addPerson(p)) {
-            removePerson(p);
+            this->removePerson(p);
             return true;
         }
     }

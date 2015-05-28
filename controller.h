@@ -12,7 +12,7 @@ private:
     Bank* bankRight;
     Boat* boat;
     list<Person*> people;
-    bool quit = false;
+    bool quit;
 public:
     Controller();
     ~Controller();

@@ -13,7 +13,7 @@ private:
     string name;
     list<Person*> people;
 protected:
-    int fill = 0;
+    int fill;
 public:
     bool contains(Person* p);
     bool hasDriver();
@@ -29,8 +29,8 @@ public:
     string getName() { return name; }
     string getPeople();
     
-    Container(string name) : name(name) {}
-    Container(string name, list<Person*> people) : name(name), people(people) {}
+    Container(string name) : name(name), fill(0) {}
+    Container(string name, list<Person*> people) : name(name), people(people), fill(0) {}
     virtual ~Container();
 };
 
@@ -46,9 +46,9 @@ class Boat : public Container {
 private:
     Bank* current;
     Bank* other;
-    bool side = 0;
+    bool side;
 public:
-    Boat(string name, Bank* start, Bank* end) : Container(name), current(start), other(end) {}
+    Boat(string name, Bank* start, Bank* end) : Container(name), current(start), other(end), side(0) {}
     ~Boat();
     bool embark(Person* p);
     bool disembark(Person* p);
