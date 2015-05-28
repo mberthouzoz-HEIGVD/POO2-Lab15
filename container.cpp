@@ -119,6 +119,10 @@ void Container::addAll(list<Person*> l) {
     }
 }
 
+void Container::removePerson(Person* p) {
+    people.remove(p);
+}
+
 string Container::getPeople() {
     string t = "";
     for (Person* p : people) {
