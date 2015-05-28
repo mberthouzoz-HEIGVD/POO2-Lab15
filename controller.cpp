@@ -3,8 +3,12 @@
 
 using namespace std;
 
-Controller::Controller() : turn(0), bankLeft(new Bank("Gauche")), bankRight(new Bank("Droite")), boat(new Boat("Bateau", bankLeft)) {
+Controller::Controller() {
+    init();
+}
 
+Controller::~Controller() {
+    clear();
 }
 
 void Controller::showMenu() const {
@@ -18,33 +22,107 @@ void Controller::showMenu() const {
 }
 
 void Controller::display() const {
-    cout << "----------------------------------------------------------" << endl;
-    cout << "Gauche:" << endl; // etc
-    cout << "----------------------------------------------------------" << endl;
-    //if bank 1
-    cout << "==========================================================" << endl;
-    //if bank 2
-    cout << "----------------------------------------------------------" << endl;
-    cout << "Droite:" << endl; // etc
-    cout << "----------------------------------------------------------" << endl;
+    cout << bankLeft;
+    cout << boat;
+    cout << bankRight;
 }
 
 void Controller::embark(string name) {
-
+    boat->embark(getPerson(name));
 }
 
 void Controller::disembark(string name) {
-
+    boat->disembark(getPerson(name));
 }
 
 void Controller::moveBoat() {
+    if (!boat->move()) {
+        cout << "### personne ne peut conduire le bateau" << endl;
+    }
+}
 
+void Controller::init() {
+    turn = 0;
+    bankLeft = new Bank("Gauche");
+    bankRight = new Bank("Droite");
+    boat = new Boat("Bateau", bankLeft, bankRight);
+    
+    Pere* pe = new Pere();
+    Mere* me = new Mere();
+    Fils* p1 = new Fils("paul");
+    Fils* p2 = new Fils("pierre");
+    Fille* j1 = new Fille("julie");
+    Fille* j2 = new Fille("jeanne");
+    Voleur* vo = new Voleur();
+    Policier* po = new Policier();
+    
+    people.push_back(pe);
+    people.push_back(me);
+    people.push_back(p1);
+    people.push_back(p2);
+    people.push_back(j1);
+    people.push_back(j2);
+    people.push_back(vo);
+    people.push_back(po);
+    
+    bankLeft->addAll(people);
+}
+
+void Controller::clear() {
+    while (!people.empty()) {
+        delete people.back();
+        people.pop_back();
+    }
+    
+    delete bankLeft;
+    delete bankRight;
+    delete boat;
 }
 
 void Controller::reset() {
-
+    clear();
+    init();
 }
 
-void Controller::nextTurn() {
+void Controller::start() {
+    showMenu();
+    display();
+    while (!quit) {
+        cout << turn++ << ">";
+        string cmd = "";
+        getline(cin, cmd);
+        
+        if (cmd == "p") {
+            display();
+        } else if (cmd == "m") {
+            moveBoat();
+        } else if (cmd == "r") {
+            reset();
+        } else if (cmd == "q") {
+            quit = true;
+        } else if (cmd == "h") {
+            showMenu();
+        } else if (cmd.substr(0, 2) == "e ") {
+            embark(cmd.substr(2,string::npos));
+        } else if (cmd.substr(0, 2) == "d ") {
+            disembark(cmd.substr(2,string::npos));
+            if (boat->isEmpty() and bankLeft->isEmpty()) {
+                cout << "vous avez fini, bravo!" << endl;
+                quit = true;
+            }
+        } else {
+            cout << "### commande non reconnue" << endl;
+            showMenu();
+        }
+    }
+    system("PAUSE");
+}
 
+Person* Controller::getPerson(string name) {
+    for (Person* p : people) {
+        if (p == name) {
+            return p;
+        }
+    }
+    return nullptr;
 }

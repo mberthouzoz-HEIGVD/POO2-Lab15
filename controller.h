@@ -11,16 +11,25 @@ private:
     Bank* bankLeft;
     Bank* bankRight;
     Boat* boat;
+    list<Person*> people;
+    bool quit = false;
 public:
-	Controller();
+    Controller();
     ~Controller();
-	void showMenu() const;
-	void embark(string name);
-	void disembark(string name);
-	void moveBoat();
-	void reset();
+    void showMenu() const;
+    
+    void embark(string name);
+    void disembark(string name);
+    void moveBoat();
+    
+    void init();
+    void clear();
+    void reset();
+    
     void display() const;
-    void nextTurn();
+    void start();
+    
+    Person* getPerson(string name);
 };
 
 #endif

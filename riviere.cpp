@@ -6,42 +6,8 @@
 using namespace std;
 
 int main() {
-	Controller* ctrl = new Controller();
-	string cmd = "";
-	bool quit = false;
-	ctrl->showMenu();
-	while (!quit) {
-		getline(cin, cmd);
-		
-		if (cmd == "p") {
-
-		}
-		else if (cmd == "m") {
-
-		}
-		else if (cmd == "r") {
-
-		}
-		else if (cmd == "q") {
-
-		}
-		else if (cmd == "h") {
-
-		}
-		else if (cmd.substr(0, 2) == "e ") {
-
-		}
-		else if (cmd.substr(0, 2) == "d ") {
-
-		}
-		else {
-			cout << "Commande non reconnue" << endl;
-			ctrl->showMenu();
-		}
-		
-	}
-
-	system("PAUSE");
+    Controller ctrl;
+    ctrl.start();
 
     return EXIT_SUCCESS;
 }
