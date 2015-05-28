@@ -1,12 +1,26 @@
+#include <string>
+#include <ostream>
+
+#ifndef PERSON_H
+#define	PERSON_H
+
 using namespace std;
 
 class Person {
 private:
-    string name;
+    const string name;
+
+	Person(const Person& orig);
+	Person& operator=(const Person& orig);
 public:
     Person(string name) : name(name) {}
     ~Person();
     virtual bool canDrive() const = 0;
+	friend ostream& operator<<(ostream& out, Person p);
+	friend ostream& operator<<(ostream& out, Person* p);
+	bool operator==(const Person* o) const;
+	bool operator==(const string o) const;
+	friend bool operator==(Person* p, const string o);
 };
 
 class Pere : public Person {
@@ -50,3 +64,5 @@ public:
     ~Voleur();
     bool canDrive() const { return false; }
 };
+
+#endif	

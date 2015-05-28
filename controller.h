@@ -1,5 +1,8 @@
 #include "container.h"
 
+#ifndef CONTROLLER_H
+#define	CONTROLLER_H
+
 using namespace std;
 
 class Controller {
@@ -19,3 +22,5 @@ public:
     void display() const;
     void nextTurn();
 };
+
+#endif
