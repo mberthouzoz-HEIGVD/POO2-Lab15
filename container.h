@@ -31,13 +31,12 @@ public:
     
     Container(string name) : name(name), fill(0) {}
     Container(string name, list<Person*> people) : name(name), people(people), fill(0) {}
-    virtual ~Container();
+    ~Container();
 };
 
 class Bank : public Container {
 public:
     Bank(string name) : Container(name) {}
-    ~Bank();
     
     friend ostream& operator<<(ostream& out, Bank* b);
 };
@@ -49,7 +48,6 @@ private:
     bool side;
 public:
     Boat(string name, Bank* start, Bank* end) : Container(name), current(start), other(end), side(0) {}
-    ~Boat();
     bool embark(Person* p);
     bool disembark(Person* p);
     bool move();
