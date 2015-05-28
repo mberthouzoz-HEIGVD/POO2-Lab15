@@ -13,7 +13,7 @@ private:
     Person& operator=(const Person& orig);
 public:
     Person(string name) : name(name) {}
-    virtual ~Person() {};
+    virtual ~Person() {}
     
     string getName() { return name; }
     

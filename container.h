@@ -31,7 +31,7 @@ public:
     
     Container(string name) : name(name) {}
     Container(string name, list<Person*> people) : name(name), people(people) {}
-    ~Container();
+    virtual ~Container();
 };
 
 class Bank : public Container {
