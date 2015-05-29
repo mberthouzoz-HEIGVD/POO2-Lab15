@@ -18,9 +18,9 @@ public:
     ~Controller();
     void showMenu() const;
     
-    void embark(string name);
-    void disembark(string name);
-    void moveBoat();
+    bool embark(string name);
+    bool disembark(string name);
+    bool moveBoat();
     
     void init();
     void clear();

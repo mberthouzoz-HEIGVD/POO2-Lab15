@@ -31,8 +31,7 @@ public:
     
     Container(string name) : name(name), fill(0) {}
     Container(string name, list<Person*> people) : name(name), people(people), fill(0) {}
-    ~Container();
-};
+    ~Container() {}};
 
 class Bank : public Container {
 public:
