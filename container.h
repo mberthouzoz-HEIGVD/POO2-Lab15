@@ -19,12 +19,11 @@ public:
     bool hasDriver();
     bool isEmpty() { return fill == 0; }
     
-    bool canAdd(Person* p);
+    bool addPerson(Person* p);
     bool canRemove(Person* p);
     bool canChange(Person* add, Person* rmv);
     
     void addAll(list<Person*> l);
-    void addPerson(Person* p);
     void removePerson(Person* p);
     
     string getName() { return name; }
@@ -32,7 +31,7 @@ public:
     
     Container(string name) : name(name), fill(0) {}
     Container(string name, list<Person*> people) : name(name), people(people), fill(0) {}
-    ~Container() {}
+    ~Container();
 };
 
 class Bank : public Container {
@@ -48,7 +47,7 @@ private:
     Bank* other;
     bool side;
 public:
-    Boat(string name, Bank* start, Bank* end) : Container(name), current(start), other(end), side(1) {}
+    Boat(string name, Bank* start, Bank* end) : Container(name), current(start), other(end), side(0) {}
     bool embark(Person* p);
     bool disembark(Person* p);
     bool move();

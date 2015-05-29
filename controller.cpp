@@ -22,11 +22,9 @@ void Controller::showMenu() const {
 }
 
 void Controller::display() const {
-    cout << endl;
     cout << bankLeft;
     cout << boat;
     cout << bankRight;
-    cout << endl;
 }
 
 void Controller::embark(string name) {
@@ -90,7 +88,7 @@ void Controller::start() {
     showMenu();
     display();
     while (!quit) {
-        cout << turn++ << "> ";
+        cout << turn++ << ">";
         string cmd = "";
         getline(cin, cmd);
         
@@ -98,7 +96,6 @@ void Controller::start() {
             display();
         } else if (cmd == "m") {
             moveBoat();
-            display();
         } else if (cmd == "r") {
             reset();
         } else if (cmd == "q") {
@@ -107,10 +104,8 @@ void Controller::start() {
             showMenu();
         } else if (cmd.substr(0, 2) == "e ") {
             embark(cmd.substr(2,string::npos));
-            display();
         } else if (cmd.substr(0, 2) == "d ") {
             disembark(cmd.substr(2,string::npos));
-            display();
             if (boat->isEmpty() and bankLeft->isEmpty()) {
                 cout << "vous avez fini, bravo!" << endl;
                 quit = true;
@@ -120,6 +115,7 @@ void Controller::start() {
             showMenu();
         }
     }
+    system("PAUSE");
 }
 
 Person* Controller::getPerson(string name) {
