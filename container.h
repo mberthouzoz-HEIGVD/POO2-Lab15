@@ -7,6 +7,7 @@
 #define	CONTAINER_H
 
 /* Eleonore d'Agostino et Michael Berthouzoz
+   28-05-2015
    Ce fichier contient la structure de la classe Container et toutes ses
    sous-classes (Boat et Bank)
 */

@@ -3,6 +3,7 @@
 #include "container.h"
 
 /* Eleonore d'Agostino et Michael Berthouzoz
+   28-05-2015
    Ce fichier contient les implémentations des méthodes pour Container et ses
    sous-classes
 */

@@ -2,6 +2,7 @@
 #include <iostream>
 
 // Eleonore d'Agostino et Michael Berthouzoz
+// 28-05-2015
 
 using namespace std;
 
@@ -113,6 +114,7 @@ void Controller::start() {
             }
         } else if (cmd == "r") {
             reset();
+            display();
         } else if (cmd == "q") {
             quit = true;
         } else if (cmd == "h") {
@@ -124,6 +126,8 @@ void Controller::start() {
         } else if (cmd.substr(0, 2) == "d ") {
             if (disembark(cmd.substr(2,string::npos))) {
                 display();
+                // si le bateau est vide et la rive gauche est vide,
+                // c'est que tout le monde est sur la rive droite
                 if (boat->isEmpty() and bankLeft->isEmpty()) {
                     cout << "vous avez fini, bravo!" << endl;
                     quit = true;

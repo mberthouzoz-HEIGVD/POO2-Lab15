@@ -5,6 +5,7 @@
 #define	PERSON_H
 
 /* Eleonore d'Agostino et Michael Berthouzoz
+   28-05-2015
    Ce fichier contient la structure de la classe Person et de toutes ses
    sous-classes (Pere, Mere, Fils, Fille, Voleur et Policier)
 */

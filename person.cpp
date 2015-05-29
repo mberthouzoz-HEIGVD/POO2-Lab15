@@ -1,6 +1,7 @@
 #include "person.h"
 
 // Eleonore d'Agostino et Michael Berthouzoz
+// 28-05-2015
 
 // affichage d'une personne - son nom
 ostream& operator<<(ostream& out, Person* p) {
