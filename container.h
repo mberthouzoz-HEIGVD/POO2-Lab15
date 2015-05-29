@@ -6,6 +6,11 @@
 #ifndef CONTAINER_H
 #define	CONTAINER_H
 
+/* Eleonore d'Agostino et Michael Berthouzoz
+   Ce fichier contient la structure de la classe Container et toutes ses
+   sous-classes (Boat et Bank)
+*/
+
 using namespace std;
 
 class Container {

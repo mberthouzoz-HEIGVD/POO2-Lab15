@@ -3,6 +3,10 @@
 #ifndef CONTROLLER_H
 #define	CONTROLLER_H
 
+/* Eleonore d'Agostino et Michael Berthouzoz
+   Ce fichier contient la structure du controleur du programme
+*/
+
 using namespace std;
 
 class Controller {

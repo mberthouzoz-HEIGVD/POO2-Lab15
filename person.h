@@ -4,6 +4,11 @@
 #ifndef PERSON_H
 #define	PERSON_H
 
+/* Eleonore d'Agostino et Michael Berthouzoz
+   Ce fichier contient la structure de la classe Person et de toutes ses
+   sous-classes (Pere, Mere, Fils, Fille, Voleur et Policier)
+*/
+
 using namespace std;
 
 class Person {
@@ -18,7 +23,6 @@ public:
     
     virtual bool canDrive() { return false; }
     
-    friend ostream& operator<<(ostream& out, Person p);
     friend ostream& operator<<(ostream& out, Person* p);
     bool operator==(const Person* o) const;
     bool operator==(const string o) const;

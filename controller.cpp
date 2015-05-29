@@ -1,6 +1,8 @@
 #include "controller.h"
 #include <iostream>
 
+// Eleonore d'Agostino et Michael Berthouzoz
+
 using namespace std;
 
 Controller::Controller() : quit(false) {
@@ -11,6 +13,7 @@ Controller::~Controller() {
     clear();
 }
 
+// affichage du menu
 void Controller::showMenu() const {
     cout << "p      : afficher" << endl;
     cout << "e <nom>: embarquer <nom>" << endl;
@@ -21,6 +24,7 @@ void Controller::showMenu() const {
     cout << "h      : menu" << endl;    
 }
 
+// affichage de la rivière et des rives
 void Controller::display() const {
     cout << endl;
     cout << bankLeft;
@@ -28,18 +32,22 @@ void Controller::display() const {
     cout << bankRight;
 }
 
+// tente d'embarquer, retourne false s'il y a eu un problème
 bool Controller::embark(string name) {
     return boat->embark(getPerson(name));
 }
 
+// tente de débarquer, retourne false s'il y a eu un problème
 bool Controller::disembark(string name) {
     return boat->disembark(getPerson(name));
 }
 
+// tente déplacer le bateau, retourne false s'il y a eu un problème
 bool Controller::moveBoat() {
     return boat->move();
 }
 
+// initialisation des gens, des rives et du bateau aux positions correctes
 void Controller::init() {
     turn = 0;
     bankLeft = new Bank("Gauche");
@@ -67,6 +75,7 @@ void Controller::init() {
     bankLeft->addAll(people);
 }
 
+// destructeur des champs, dans une méthode séparée pour pouvoir reset
 void Controller::clear() {
     while (!people.empty()) {
         delete people.back();
@@ -78,11 +87,13 @@ void Controller::clear() {
     delete boat;
 }
 
+// on delete nos champs et on réinitialise
 void Controller::reset() {
     clear();
     init();
 }
 
+// boucle du jeu
 void Controller::start() {
     showMenu();
     display();
@@ -122,6 +133,7 @@ void Controller::start() {
     }
 }
 
+// retourne un objet Person à partir de son nom
 Person* Controller::getPerson(string name) {
     for (Person* p : people) {
         if (p == name) {
