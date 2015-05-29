@@ -2,6 +2,11 @@
 #include <typeinfo>
 #include "container.h"
 
+/* Eleonore d'Agostino et Michael Berthouzoz
+   Ce fichier contient les implémentations des méthodes pour Container et ses
+   sous-classes
+*/
+
 using namespace std;
 
 bool Container::contains(Person* p) {
@@ -22,13 +27,13 @@ bool Container::hasDriver() {
     return false;
 }
 
-bool Container::addPerson(Person* p) {
-    if (canChange(p, nullptr)) {
-        people.push_back(p);
-        return true;
-    } else {
-        return false;
-    }
+void Container::addPerson(Person* p) {
+    people.push_back(p);
+    fill++;
+}
+
+bool Container::canAdd(Person* p) {
+    return canChange(p, nullptr);
 }
 
 bool Container::canRemove(Person* p) {
@@ -45,21 +50,21 @@ bool Container::canChange(Person* add, Person* rmv) {
     bool aVolr = false;
     
     if (add != nullptr) {
-        if (typeid(add) == typeid(Pere)) {
+        if (typeid(*add) == typeid(Pere)) {
             aFami = true;
             aPere = true;
-        } else if (typeid(add) == typeid(Mere)) {
+        } else if (typeid(*add) == typeid(Mere)) {
             aFami = true;
             aMere = true;
-        } else if (typeid(add) == typeid(Fils)) {
+        } else if (typeid(*add) == typeid(Fils)) {
             aFami = true;
             aFils = true;
-        } else if (typeid(add) == typeid(Fille)) {
+        } else if (typeid(*add) == typeid(Fille)) {
             aFami = true;
             aFill = true;
-        } else if (typeid(add) == typeid(Policier)) {
+        } else if (typeid(*add) == typeid(Policier)) {
             aPoli = true;
-        } else if (typeid(add) == typeid(Voleur)) {
+        } else if (typeid(*add) == typeid(Voleur)) {
             aVolr = true;
         } else {
             // ceci ne devrait jamais arriver
@@ -70,21 +75,21 @@ bool Container::canChange(Person* add, Person* rmv) {
     for (Person* p : people) {
         if (p == rmv) {
             continue;
-        } else if (typeid(p) == typeid(Pere)) {
+        } else if (typeid(*p) == typeid(Pere)) {
             aFami = true;
             aPere = true;
-        } else if (typeid(p) == typeid(Mere)) {
+        } else if (typeid(*p) == typeid(Mere)) {
             aFami = true;
             aMere = true;
-        } else if (typeid(p) == typeid(Fils)) {
+        } else if (typeid(*p) == typeid(Fils)) {
             aFami = true;
             aFils = true;
-        } else if (typeid(p) == typeid(Fille)) {
+        } else if (typeid(*p) == typeid(Fille)) {
             aFami = true;
             aFill = true;
-        } else if (typeid(p) == typeid(Policier)) {
+        } else if (typeid(*p) == typeid(Policier)) {
             aPoli = true;
-        } else if (typeid(p) == typeid(Voleur)) {
+        } else if (typeid(*p) == typeid(Voleur)) {
             aVolr = true;
         } else {
             // ceci ne devrait jamais arriver
@@ -114,6 +119,7 @@ void Container::addAll(list<Person*> l) {
 
 void Container::removePerson(Person* p) {
     people.remove(p);
+    fill--;
 }
 
 string Container::getPeople() {
@@ -145,11 +151,10 @@ bool Boat::embark(Person* p) {
         return false;
     }
     
-    if (current->canRemove(p)){
-        if (addPerson(p)) {
-            current->removePerson(p);
-            return true;
-        }
+    if (current->canRemove(p) && canAdd(p)){
+        addPerson(p);
+        current->removePerson(p);
+        return true;
     }
     return false;
 }
@@ -161,15 +166,14 @@ bool Boat::disembark(Person* p) {
         cout << "### le bateau est vide..." << endl;
         return false;
     } else if (!contains(p)) {
-        cout << "### " << p->getName() << "n'est pas sur le bateau" << endl;
+        cout << "### " << p->getName() << " n'est pas sur le bateau" << endl;
         return false;
     }
     
-    if (canRemove(p)) {
-        if (current->addPerson(p)) {
-            this->removePerson(p);
-            return true;
-        }
+    if (canRemove(p) && current->canAdd(p)) {
+        current->addPerson(p);
+        this->removePerson(p);
+        return true;
     }
     return false;
 }

@@ -1,6 +1,8 @@
 #include "controller.h"
 #include <iostream>
 
+// Eleonore d'Agostino et Michael Berthouzoz
+
 using namespace std;
 
 Controller::Controller() : quit(false) {
@@ -22,6 +24,7 @@ void Controller::showMenu() const {
 }
 
 void Controller::display() const {
+    cout << endl;
     cout << bankLeft;
     cout << boat;
     cout << bankRight;
@@ -73,11 +76,8 @@ void Controller::clear() {
     }
     
     delete bankLeft;
-    bankLeft = nullptr;
     delete bankRight;
-    bankRight = nullptr;
     delete boat;
-    boat = nullptr;
 }
 
 void Controller::reset() {
@@ -89,7 +89,6 @@ void Controller::start() {
     showMenu();
     display();
     while (!quit) {
-
         cout << endl << turn++ << "> ";
         string cmd = "";
         getline(cin, cmd);
@@ -109,7 +108,7 @@ void Controller::start() {
         } else if (cmd.substr(0, 2) == "e ") {
             if (embark(cmd.substr(2,string::npos))) {
                 display();
-            }        
+            }
         } else if (cmd.substr(0, 2) == "d ") {
             if (disembark(cmd.substr(2,string::npos))) {
                 display();
@@ -123,7 +122,6 @@ void Controller::start() {
             showMenu();
         }
     }
-    system("PAUSE");
 }
 
 Person* Controller::getPerson(string name) {
