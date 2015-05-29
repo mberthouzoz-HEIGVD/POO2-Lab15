@@ -76,8 +76,11 @@ void Controller::clear() {
     }
     
     delete bankLeft;
+    bankLeft = nullptr;
     delete bankRight;
+    bankRight = nullptr;
     delete boat;
+    boat = nullptr;
 }
 
 void Controller::reset() {
