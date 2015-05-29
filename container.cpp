@@ -4,13 +4,6 @@
 
 using namespace std;
 
-/*Container::~Container() {
-    while (!people.empty()) {
-        delete people.back();
-        people.pop_back();
-    }
-}*/
-
 bool Container::contains(Person* p) {
     for (Person* t : people) {
         if (t == p) {
@@ -188,6 +181,7 @@ bool Boat::move() {
         side = !side;
         return true;
     } else {
+        cout << "### personne ne peut conduire le bateau" << endl;
         return false;
     }
 }

@@ -26,21 +26,18 @@ void Controller::display() const {
     cout << bankLeft;
     cout << boat;
     cout << bankRight;
-    cout << endl;
 }
 
-void Controller::embark(string name) {
-    boat->embark(getPerson(name));
+bool Controller::embark(string name) {
+    return boat->embark(getPerson(name));
 }
 
-void Controller::disembark(string name) {
-    boat->disembark(getPerson(name));
+bool Controller::disembark(string name) {
+    return boat->disembark(getPerson(name));
 }
 
-void Controller::moveBoat() {
-    if (!boat->move()) {
-        cout << "### personne ne peut conduire le bateau" << endl;
-    }
+bool Controller::moveBoat() {
+    return boat->move();
 }
 
 void Controller::init() {
@@ -90,15 +87,16 @@ void Controller::start() {
     showMenu();
     display();
     while (!quit) {
-        cout << turn++ << "> ";
+        cout << endl << turn++ << "> ";
         string cmd = "";
         getline(cin, cmd);
         
         if (cmd == "p") {
             display();
         } else if (cmd == "m") {
-            moveBoat();
-            display();
+            if (moveBoat()) {
+                display();
+            }
         } else if (cmd == "r") {
             reset();
         } else if (cmd == "q") {
@@ -106,14 +104,16 @@ void Controller::start() {
         } else if (cmd == "h") {
             showMenu();
         } else if (cmd.substr(0, 2) == "e ") {
-            embark(cmd.substr(2,string::npos));
-            display();
+            if (embark(cmd.substr(2,string::npos))) {
+                display();
+            }
         } else if (cmd.substr(0, 2) == "d ") {
-            disembark(cmd.substr(2,string::npos));
-            display();
-            if (boat->isEmpty() and bankLeft->isEmpty()) {
-                cout << "vous avez fini, bravo!" << endl;
-                quit = true;
+            if (disembark(cmd.substr(2,string::npos))) {
+                display();
+                if (boat->isEmpty() and bankLeft->isEmpty()) {
+                    cout << "vous avez fini, bravo!" << endl;
+                    quit = true;
+                }
             }
         } else {
             cout << "### commande non reconnue" << endl;
